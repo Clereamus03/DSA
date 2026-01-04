@@ -27,6 +27,7 @@ def create_problem_structure(category: str, problem_name: str):
     # Create directories
     (base_path / 'attempts' / 'python').mkdir(parents=True, exist_ok=True)
     (base_path / 'attempts' / 'java').mkdir(parents=True, exist_ok=True)
+    (base_path / 'attempts' / 'cpp').mkdir(parents=True, exist_ok=True)
     
     # Create README.md
     readme_content = f"""# {problem_name.replace('-', ' ').title()}
@@ -116,7 +117,7 @@ Explanation:
     print(f"Location: {base_path}")
     print(f"\nNext steps:")
     print(f"1. Fill in the README.md with problem details")
-    print(f"2. Implement your solution in attempts/python/attempt_1.py and attempts/java/attempt_1.java")
+    print(f"2. Implement your solution in attempts/python/attempt_1.py, attempts/java/attempt_1.java, or attempts/cpp/attempt_1.cpp")
     print(f"3. Update reflection.md after solving")
 
 

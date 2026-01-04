@@ -49,6 +49,8 @@ def find_attempts(category, problem, language):
                 attempts.append(file.stem)  # Get filename without extension
             elif language == 'java' and file.suffix == '.java':
                 attempts.append(file.stem)
+            elif language == 'cpp' and file.suffix == '.cpp':
+                attempts.append(file.stem)
     return sorted(attempts, key=lambda x: int(x.split('_')[1]) if '_' in x and x.split('_')[1].isdigit() else 0)
 
 
@@ -177,11 +179,81 @@ def run_java_test(category, problem, attempt):
         return False
 
 
+def run_cpp_test(category, problem, attempt):
+    """Compile and run a C++ solution file."""
+    file_path = Path(category) / 'problems' / problem / 'attempts' / 'cpp' / f'{attempt}.cpp'
+    attempts_dir = Path(category) / 'problems' / problem / 'attempts' / 'cpp'
+    
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}")
+        return False
+    
+    print(f"\n{'='*60}")
+    print(f"Running C++ Solution")
+    print(f"{'='*60}")
+    print(f"Category: {category}")
+    print(f"Problem: {problem}")
+    print(f"Attempt: {attempt}")
+    print(f"File: {file_path}")
+    print(f"{'='*60}\n")
+    
+    try:
+        # Compile the C++ file
+        print("Compiling C++ file...")
+        executable_name = attempt  # Use attempt name as executable name
+        executable_path = attempts_dir / executable_name
+        
+        # On Windows, add .exe extension
+        import platform
+        if platform.system() == 'Windows':
+            executable_path = attempts_dir / f'{executable_name}.exe'
+        
+        compile_result = subprocess.run(
+            ['g++', str(file_path), '-o', str(executable_path), '-std=c++17'],
+            capture_output=True,
+            text=True,
+            cwd=str(attempts_dir)
+        )
+        
+        if compile_result.returncode != 0:
+            print(f"Compilation failed:")
+            print(compile_result.stderr)
+            return False
+        
+        print("Compilation successful!\n")
+        
+        # Run the compiled executable
+        print("Running C++ program...\n")
+        run_result = subprocess.run(
+            [str(executable_path)],
+            capture_output=False,
+            text=True
+        )
+        
+        print(f"\n{'='*60}")
+        print(f"Exit code: {run_result.returncode}")
+        print(f"{'='*60}")
+        
+        # Clean up executable
+        if executable_path.exists():
+            executable_path.unlink()
+        
+        return run_result.returncode == 0
+        
+    except FileNotFoundError:
+        print("Error: C++ compiler (g++) not found. Make sure g++ is installed and in PATH.")
+        print("On Windows, you may need MinGW or use WSL.")
+        return False
+    except Exception as e:
+        print(f"Error running C++ file: {e}")
+        return False
+
+
 def run_test_direct(category, problem, attempt, language):
     """Run a test directly with provided parameters."""
     # Validate language
-    if language not in ['python', 'java']:
-        print(f"Error: Invalid language '{language}'. Use 'python' or 'java'.")
+    if language not in ['python', 'java', 'cpp']:
+        print(f"Error: Invalid language '{language}'. Use 'python', 'java', or 'cpp'.")
         return False
     
     # Validate that the attempt exists
@@ -198,8 +270,10 @@ def run_test_direct(category, problem, attempt, language):
     # Run the test
     if language == 'python':
         return run_python_test(category, problem, attempt)
-    else:
+    elif language == 'java':
         return run_java_test(category, problem, attempt)
+    else:  # cpp
+        return run_cpp_test(category, problem, attempt)
 
 
 def main():
@@ -238,6 +312,7 @@ def main():
             print("  python test.py <category> <problem> <attempt> <language>  # Test specific attempt")
             print("\nExamples:")
             print("  python test.py arrays three-sum python")
+            print("  python test.py arrays three-sum cpp")
             print("  python test.py arrays three-sum attempt_1 python")
             print("  python test.py arrays three-sum attempt_2 java")
         return
@@ -249,19 +324,25 @@ def main():
     print("\nSelect an option:")
     print("1. Test Python solution")
     print("2. Test Java solution")
+    print("3. Test C++ solution")
     print("0. Exit")
     
-    choice = input("\nEnter your choice (0-2): ").strip()
+    choice = input("\nEnter your choice (0-3): ").strip()
     
     if choice == '0':
         print("Exiting...")
         return
     
-    if choice not in ['1', '2']:
-        print("Invalid choice. Please select 1 or 2.")
+    if choice not in ['1', '2', '3']:
+        print("Invalid choice. Please select 1, 2, or 3.")
         return
     
-    language = 'python' if choice == '1' else 'java'
+    if choice == '1':
+        language = 'python'
+    elif choice == '2':
+        language = 'java'
+    else:  # choice == '3'
+        language = 'cpp'
     
     # Find categories
     categories = find_categories()
@@ -329,8 +410,10 @@ def main():
     # Run the test
     if choice == '1':
         run_python_test(category, problem, attempt)
-    else:
+    elif choice == '2':
         run_java_test(category, problem, attempt)
+    else:  # choice == '3'
+        run_cpp_test(category, problem, attempt)
 
 
 if __name__ == "__main__":

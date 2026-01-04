@@ -15,9 +15,13 @@ DSA/
 │           │   │   ├── attempt_1.py
 │           │   │   ├── attempt_2.py
 │           │   │   └── ...
-│           │   └── java/
-│           │       ├── attempt_1.java
-│           │       ├── attempt_2.java
+│           │   ├── java/
+│           │   │   ├── attempt_1.java
+│           │   │   ├── attempt_2.java
+│           │   │   └── ...
+│           │   └── cpp/
+│           │       ├── attempt_1.cpp
+│           │       ├── attempt_2.cpp
 │           │       └── ...
 │           └── reflection.md     # Approach, complexity analysis, learnings
 ├── arrays/                        # Example: Arrays category
@@ -30,14 +34,14 @@ DSA/
 
 1. **Starting a New Problem**: Use the helper script: `python create_problem.py <category> <problem-name>`
 2. **Problem Setup**: Fill in the `README.md` with the problem link and description
-3. **First Solution**: Write your solution in `attempts/python/attempt_1.py` and `attempts/java/attempt_1.java`
+3. **First Solution**: Write your solution in `attempts/python/attempt_1.py`, `attempts/java/attempt_1.java`, or `attempts/cpp/attempt_1.cpp`
 4. **Track Attempts**: Save all your attempts in the `attempts/python/` and `attempts/java/` folders
 5. **Revision**: When practicing again, save new attempts with higher numbers (e.g., `attempt_2.py`, `attempt_3.py`)
 6. **Reflection**: Document your approach, time/space complexity, and key learnings in `reflection.md`
 
 ## Testing Solutions
 
-Use the `test.py` script to run and test your solutions. There are two ways to use it:
+Use the `test.py` script to run and test your solutions. Supported languages: **Python**, **Java**, and **C++**. There are two ways to use it:
 
 ### Quick Testing (Recommended for Active Development)
 
@@ -58,6 +62,9 @@ python test.py <category> <problem> <attempt> <language>
 # Test latest Python solution for three-sum
 python test.py arrays three-sum python
 
+# Test C++ solution
+python test.py arrays three-sum cpp
+
 # Test specific attempt
 python test.py arrays three-sum attempt_1 python
 
@@ -73,12 +80,14 @@ python test.py
 ```
 
 This will guide you through selecting:
-1. Language (Python or Java)
+1. Language (Python, Java, or C++)
 2. Category
 3. Problem
 4. Attempt
 
-**Note:** For Java solutions, the script automatically compiles the code before running and cleans up `.class` files afterward.
+**Note:** 
+- For Java solutions, the script automatically compiles the code before running and cleans up `.class` files afterward.
+- For C++ solutions, the script uses `g++` compiler with C++17 standard. On Windows, you may need MinGW or WSL.
 
 ## Categories
 
