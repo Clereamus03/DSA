@@ -30,14 +30,45 @@ DSA/
 └── README.md                      # This file
 ```
 
-## How to Use
+## Creating a New Problem
 
-1. **Starting a New Problem**: Use the helper script: `python create_problem.py <category> <problem-name>`
-2. **Problem Setup**: Fill in the `README.md` with the problem link and description
-3. **First Solution**: Write your solution in `attempts/python/attempt_1.py`, `attempts/java/attempt_1.java`, or `attempts/cpp/attempt_1.cpp`
-4. **Track Attempts**: Save all your attempts in the `attempts/python/` and `attempts/java/` folders
-5. **Revision**: When practicing again, save new attempts with higher numbers (e.g., `attempt_2.py`, `attempt_3.py`)
-6. **Reflection**: Document your approach, time/space complexity, and key learnings in `reflection.md`
+### Option 1: Using the Helper Script (Recommended)
+
+Use the `create_problem.py` script to automatically set up a new problem:
+
+```bash
+python create_problem.py <category> <problem-name>
+```
+
+**Examples:**
+```bash
+python create_problem.py arrays two-sum
+python create_problem.py linked-list reverse-linked-list
+python create_problem.py trees binary-tree-inorder-traversal
+```
+
+This will create the complete folder structure with:
+- `README.md` template
+- `reflection.md` template
+- `attempts/python/` directory
+- `attempts/java/` directory
+- `attempts/cpp/` directory
+
+### Option 2: Manual Creation
+
+1. Create a category folder at the root if it doesn't exist (e.g., `arrays/`)
+2. Create `problems/` folder inside the category
+3. Create a problem folder inside `problems/` (e.g., `arrays/problems/two-sum/`)
+4. Copy the structure from an existing problem
+5. Update all files with your problem details
+
+## Problem Workflow
+
+1. **Problem Setup**: Fill in the `README.md` with the problem link and description
+2. **First Solution**: Write your solution in `attempts/python/attempt_1.py`, `attempts/java/attempt_1.java`, or `attempts/cpp/attempt_1.cpp`
+3. **Track Attempts**: Save all your attempts in the `attempts/python/`, `attempts/java/`, or `attempts/cpp/` folders
+4. **Revision**: When practicing again, save new attempts with higher numbers (e.g., `attempt_2.py`, `attempt_3.cpp`)
+5. **Reflection**: Document your approach, time/space complexity, and key learnings in `reflection.md`
 
 ## Testing Solutions
 

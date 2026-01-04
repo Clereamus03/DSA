@@ -4,20 +4,7 @@ This guide explains how to use this repository structure effectively for practic
 
 ## Quick Start
 
-### Creating a New Problem
-
-**Option 1: Using the helper script (Recommended)**
-```bash
-python create_problem.py arrays two-sum
-python create_problem.py linked-list reverse-linked-list
-python create_problem.py trees binary-tree-inorder-traversal
-```
-
-**Option 2: Manual creation**
-1. Create a category folder in `problems/` if it doesn't exist (e.g., `arrays`)
-2. Create a problem folder inside the category (e.g., `problems/arrays/two-sum/`)
-3. Copy the structure from an existing problem
-4. Update all files with your problem details
+> **Note:** For creating new problems, see the [README.md](README.md#creating-a-new-problem) file.
 
 ### Problem Workflow
 
@@ -31,13 +18,13 @@ python create_problem.py trees binary-tree-inorder-traversal
 #### 2. First Attempt
 - Read the problem carefully
 - Think about the approach
-- Implement in `attempts/python/attempt_1.py` and `attempts/java/attempt_1.java`
-- Test your solution
+- Implement in `attempts/python/attempt_1.py`, `attempts/java/attempt_1.java`, or `attempts/cpp/attempt_1.cpp`
+- Test your solution using `test.py` (see [README.md](README.md#testing-solutions))
 - If you have multiple attempts, save them with incrementing numbers:
   - `attempts/python/attempt_1.py`
   - `attempts/java/attempt_1.java`
+  - `attempts/cpp/attempt_1.cpp`
   - `attempts/python/attempt_2.py`
-  - `attempts/java/attempt_2.java`
   - etc.
 
 #### 3. Reflection
@@ -51,45 +38,19 @@ After solving, update `reflection.md` with:
 #### 4. Revision Practice
 When you want to practice again (spaced repetition):
 1. **Don't look at previous attempts** in the attempts folder
-2. Try solving again and save as a new attempt in `attempts/python/` or `attempts/java/`
+2. Try solving again and save as a new attempt in `attempts/python/`, `attempts/java/`, or `attempts/cpp/`
 3. Use the next attempt number (e.g., if last was `attempt_3.py`, use `attempt_4.py`)
 4. After solving, compare with your previous attempts
 5. Update `reflection.md` with revision notes
 
-## File Structure Explained
-
-```
-category-name/             # Data structure category (e.g., arrays, trees)
-└── problems/
-    └── problem-name/
-        ├── README.md      # Problem metadata and description
-        ├── attempts/      # All solutions (initial attempts and revisions)
-        │   ├── python/
-        │   │   ├── attempt_1.py
-        │   │   ├── attempt_2.py
-        │   │   └── ...
-        │   └── java/
-        │       ├── attempt_1.java
-        │       ├── attempt_2.java
-        │       └── ...
-        └── reflection.md  # Your analysis and learnings
-```
-
 ## Best Practices
 
-### Category Organization
-- Organize problems by data structure/algorithm type
-- Common categories: `arrays`, `linked-list`, `trees`, `hash-table`, `strings`, `dynamic-programming`, `graphs`, etc.
-- If a problem fits multiple categories, choose the primary one
-
-### Problem Naming
-- Use lowercase with hyphens: `two-sum`, `reverse-linked-list`
-- Be descriptive: `merge-k-sorted-lists` not `merge-lists`
+> **Note:** For repository structure, categories, and naming conventions, see the [README.md](README.md) file.
 
 ### Solution Files
 - Keep solutions clean and well-commented
-- Include test cases in your solution files
 - Document your approach in comments
+- Test your solutions using `test.py` (see [README.md](README.md#testing-solutions))
 
 ### Attempts Tracking
 - Save attempts when:
@@ -101,7 +62,7 @@ category-name/             # Data structure category (e.g., arrays, trees)
 ### Revision Practice
 - Practice problems you solved 1-2 weeks ago
 - Don't peek at solutions while revising
-- Save revision attempts in `attempts/python/` or `attempts/java/` with the next attempt number
+- Save revision attempts in `attempts/python/`, `attempts/java/`, or `attempts/cpp/` with the next attempt number
 - Update reflection after each revision
 - Note what you remembered vs. what you forgot
 
@@ -114,10 +75,10 @@ category-name/             # Data structure category (e.g., arrays, trees)
 ## Example Workflow Timeline
 
 **Day 1: First Encounter**
-1. Create problem folder: `python create_problem.py arrays two-sum`
+1. Create problem folder (see [README.md](README.md#creating-a-new-problem))
 2. Fill in README.md
 3. Solve in Python → `attempts/python/attempt_1.py`
-4. Solve in Java → `attempts/java/attempt_1.java`
+4. Solve in Java → `attempts/java/attempt_1.java` (or C++ → `attempts/cpp/attempt_1.cpp`)
 5. Update `reflection.md`
 
 **Day 2: If needed**
